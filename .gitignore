@@ -1,5 +1,6 @@
-.Rhistory
-.RData
 .Rproj.user/
+_targets/
+data/output/
 report/*.html
-report/*_files
+*.Rhistory
+*.RData
