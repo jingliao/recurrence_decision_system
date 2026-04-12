@@ -11,6 +11,7 @@ tar_option_set(
 source("R/simulate_data.R")
 source("R/feature_engineering.R")
 source("R/model.R")
+source("R/validation.R")
 
 # defining dependencies between targets(nodes)
 
@@ -22,7 +23,9 @@ list(
   tar_target(prediction_cont, add_prediction(df_features, model_fit_cont)),
   tar_target(prediction_cate, add_prediction(df_features, model_fit_cate)),
   tar_target(evaluate_cont, evaluate_model(prediction_cont)),
-  tar_target(evaluate_cate, evaluate_model(prediction_cate))
+  tar_target(evaluate_cate, evaluate_model(prediction_cate)),
+  tar_target(validation_cont, func_run_validation_checks(prediction_cont)),
+  tar_target(validation_cate, func_run_validation_checks(prediction_cate))
 )
 
 # execution part ONLY can be conducted in Console, DO NOT comment out in this file!
