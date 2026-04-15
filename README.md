@@ -39,6 +39,8 @@ e.g. second episode date is earlier than first episode date,
 - what to do when validation fails
 - what to do when model confidence drops
 
+# placeholder, complete this readme file
+
 Purpose for each R script:
 1. ingestion.R
    read data and standardise columns

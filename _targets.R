@@ -1,10 +1,11 @@
 # required packages
 library(targets)
-#library(tarchetypes)
+library(tarchetypes) # to produce .qmd if run tar_make() in the console
 
 # required packages for runtime inside nodes
 tar_option_set(
-  packages = c("dplyr", "tidyr", "ggplot2", "purrr", "lubridate", "tibble")
+  packages = c("dplyr", "tidyr", "ggplot2", "purrr", "lubridate", "tibble"),
+  format = "rds" # to produce .qmd if run tar_make() in the console
 )
 
 # source functions
@@ -28,21 +29,6 @@ list(
   tar_target(validation_cont, func_run_validation_checks(prediction_cont)),
   tar_target(validation_cate, func_run_validation_checks(prediction_cate)),
   tar_target(decision_output_cont, func_create_decision_output(prediction_cont)),
-  tar_target(decision_output_cate, func_create_decision_output(prediction_cate))
+  tar_target(decision_output_cate, func_create_decision_output(prediction_cate)),
+  tar_quarto(report, "report/decision_report.qmd")
 )
-
-# execution part ONLY can be conducted in Console, DO NOT comment out in this file!
-# tar_read(sim_person)
-# tar_make(names = c("episodes", "report_episode")) # this will only run episodes part in the report
-# tar_make(names = "report_episode")
-
-# to check the data:
-# tar_make(names = object_of_interest)
-# tar_read(object_of_interest) |> head()
-# tar_make(names = c("person_features", "model_fit", "report_model"))
-# tar_make(names = "person_features")
-# tar_read(person_features) |> names()
-# tar_make(names = "ds_prediction")
-# tar_read(ds_prediction) |> head()
-# tar_visnetwork()
-# tar_make(names = "report_prediction")

@@ -1,6 +1,151 @@
 ---
-title: "decision_report"
+title: "Recurrence Decision Report"
 format: html
+execute: 
+  echo: false
+  warning: false
+  message: false
 ---
 
-this is a business-facing operational focused report
+```{r}
+
+# required R packages
+
+## comment it out if you only want to redner .qmd directly or run the code quarto::quarto_render("report/decision_report.qmd") for preview, otherwise, keep it as it is if you want to execute the whole project via tar_make() in the console
+# setwd("..")
+
+library(targets)
+library(dplyr)
+
+# load outputs
+
+decision_output_cont <- tar_read(decision_output_cont)
+decision_output_cate <- tar_read(decision_output_cate)
+
+validation_cont <- tar_read(validation_cont)
+validation_cate <- tar_read(validation_cate)
+
+evaluate_cont <- tar_read(evaluate_cont)
+evaluate_cate <- tar_read(evaluate_cate)
+
+```
+
+# 1. Executive Summary
+
+This report presents the result of a recurrence prediction pipeline, including model outputs, validation checks, and decision-support segmentation. The key highlights are listed below:
+
+- Recurrence risk was estimated using logistic regression models
+- The population was segmented into risk tiers (high, medium, low)
+- Suggested actions were assigned to support prioritisation
+- Validation checks were performed to ensure output reliability
+
+# 2. Model Performance
+
+Two model specifications were evaludated:
+
+- Model A: continuous duration representation
+
+```{r}
+evaluate_cont
+```
+
+- Model B: categorical duration representation
+
+```{r}
+evaluate_cate
+```
+
+# 3. Validation Checks
+
+The following checks were performed on prediction outputs to ensure data quality and logical reliability.
+
+- Required columns present
+- No unexpected missing values
+- Predicted probabilities within [0,1]
+- Predicted classes valid (0/1)
+- Risk level values valid
+
+For Model A, the checks are:
+
+```{r}
+validation_cont
+```
+, and for Model B:
+```{r}
+validation_cate
+```
+
+# 4. Decision Output Overview
+
+Predicted probablities were translated into actionable risk tiers:
+
+- High risk indicates priority to follow-up
+- Medium risk suggests an action of monitoring
+- Low risk advises routine review
+
+The distribution of risk tiers and the first 10 top high-risk cases based on Model A are:
+```{r}
+
+decision_output_cont |>
+  count(risk_tier)
+
+top_high_count_cont <- decision_output_cont |>
+  filter(risk_tier == "high") |>
+  arrange(desc(pred_prob)) |>
+  head(10)
+
+if(nrow(top_high_count_cont) == 0){
+  
+  cat("No high-risk cases identified under Model A, indicating the prediction of this model is relatively conservative.")
+  
+} else {
+  
+  top_high_count_cont
+  
+}
+
+```
+
+, and based on Model B are:
+```{r}
+decision_output_cate |>
+  count(risk_tier)
+
+
+top_high_count_cate <- decision_output_cate |>
+  filter(risk_tier == "high") |>
+  arrange(desc(pred_prob)) |>
+  head(10)
+
+if(nrow(top_high_count_cate) == 0){
+  
+  cat("No high-risk cases identified under Model B, indicating the prediction of this model is relatively conservative.")
+  
+} else {
+  
+  top_high_count_cate
+  
+}
+
+```
+
+# 5. Interpretation
+
+The model outputs are intended to support prioritisation decisions rather than to provide deterministic predictions.
+
+Here are key considerations:
+
+- Risk tiers are based on probability thresholds and should be interpreted alongside contextual information.
+
+- High-risk cases indicate higher likelihood of recurrence within the predefined time window.
+
+- The models are designed for demonstration using simulated data and does not represent real-world intervention effectiveness.
+
+# 6. Limitations
+
+The project has limitations listed below:
+
+- The data used in this work is simulated.
+- Recurrence is driven primarily by risk level in the data generating process.
+- Duration-based features may not reflect real-world signals.
+- Thresholds for risk segmentation are illustrative.
