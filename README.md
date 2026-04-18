@@ -1,5 +1,57 @@
 # Recurrence decision system
 
+## Overview
+
+This project extends a simple recurrence prediction model into a small decision-support pipeline.
+It  demonstrates how model outputs can be validated, interpreted, and translated into actionable risk tiers.
+
+## What it does
+
+- Simulates event data with a controlled data-generating process
+- Builds logistic regression models to predict recurrence
+- Compares continuous vs. categorical feature representations
+- Adds validation checks on prediction outputs
+- Converts predictions into risk tiers and suggested actions
+- Generates a Quarto report
+
+## Workflow
+
+simulate_data -> features -> model -> prediction -> validation -> decision -> report
+
+## Deployment
+
+run the pipeline via code below in console:
+
+```{r}
+library(targets)
+tar_make()
+```
+## Key idea
+
+This project is not about building a more complex model. It focuses on:
+
+turning model outputs into something that can actually be used
+
+## Structure
+
+- R/
+  |----- simulate_data.R
+  |----- feature_engineering.R
+  |----- model.R
+  |----- validation.R
+  |----- decision.R
+- report/
+  |----- decision_report.qmd
+- _targets.R
+
+## Notes
+
+- Data is simulated for demonstration purposes
+- Risk tiers are based on simple thresholds
+- The emphasis is on workflow design reather than model performance
+
+-----------------------------------------
+
 Operationalising recurrence prediction into a reproducible decision-support workflow for cross-functional use.
 The goal of this project is to demonstrate my competency, not only building models but also:
 - how to design models into procedures
