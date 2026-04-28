@@ -9,7 +9,7 @@
 
 func_check_required_columns <- function(param_df, param_cols){
   
-  # find columns not are not in the data
+  # find columns that are not in the data
   missing_cols <- setdiff(param_cols, names(param_df))
   
   tibble::tibble(check = "required_columns",
@@ -44,7 +44,7 @@ func_check_pred_prob_ranges <- function(param_df, param_col = "pred_prob"){
   
   tibble::tibble(check = "range_predicted_probability",
                  passed = bad_n == 0,
-                 details = paste("Number of invalid predicted probabilities either out of (0,1) or NA:", bad_n)
+                 details = paste("Number of invalid predicted probabilities:", bad_n)
                  )
   
 }
@@ -56,7 +56,7 @@ func_check_pred_class_values <- function(param_df, param_col = "pred_class"){
   bad_n = sum(!param_df[[param_col]] %in% c(0, 1))
   tibble::tibble(check = "values_predicted_class",
                  passed = bad_n == 0,
-                 details = paste("Number of invalid predicted classes:", "bad_n")
+                 details = paste("Number of invalid predicted classes:", bad_n)
                  )
 }
 
