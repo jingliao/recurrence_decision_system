@@ -1,9 +1,25 @@
-# Recurrence decision system
+# Metadata
 
-## Overview
+Project : Recurrence Decision System
+Author  : Jing Liao
+Last updated date  : 28-04-2026
+Stakeholders       : die Menschen
 
-This project extends a simple recurrence prediction model into a small decision-support pipeline.
-It  demonstrates how model outputs can be validated, interpreted, and translated into actionable risk tiers.
+
+## 1. Purpose
+
+This project extends a simple recurrence pridction model (Project, recurrence_modelling) into a small decision-support pipeline.
+It demonstrates how model outputs can be validated, interpreted, and translated into actionable risk tiers.
+
+## 2. Dependencies
+
+- R version 4.5.0
+- Required R packages, details see R/
+
+
+## 3. Project Overview
+
+This decision supporting project is an extension of the Recurrence Modelling Project. 
 
 ## What it does
 

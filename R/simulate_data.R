@@ -1,7 +1,12 @@
-library(dplyr)
-library(lubridate)
+#################### Header Start ####################
+# Title : function to simulate data 
+# Author: Jing Liao
+# Date created : 22/03/2026
+# Date modified: 28/04/2026
+# Content : same copy in recurrence_modelling/R/func_simulate_data.R
+#################### Header End   ####################
 
-simulate_events <- function(n_person = 500){
+func_simulate_events <- function(n_person = 500){
   
   set.seed(123)
   

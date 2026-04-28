@@ -1,3 +1,10 @@
+#################### Header Start ####################
+# Title : functions to support decision systems
+# Author: Jing Liao
+# Date created : 22/03/2026
+# Date modified: 28/04/2026
+#################### Header End   ####################
+
 
 # assign pred_prob to risk_tier
 func_assign_risk_tier <- function(param_df, param_col = "pred_prob", param_cut_high = 0.7, param_cut_medium = 0.4){

@@ -1,35 +1,38 @@
+#################### Header Start ####################
+# Title : functions to do model fitting, prediction and evaluation 
+# Author: Jing Liao
+# Date created : 22/03/2026
+# Date modified: 28/04/2026
+# Content: same copy in recurrence_modelling/R/func_model.R
+#################### Header End   ####################
 
-library(dplyr)
+# model fitting
 
-# model A: continuous duration
-
-fit_model_continuous <- function(df_feature){
+func_fit_model_episode <- function(df_feature, continuous_episode = TRUE){
   
-  model <- glm(y_recur_within_180 ~ risk_level + episode_first_duration,
-               data = df_feature,
-               family = binomial()
-               )
+  # model A: continuous duration
+  if(continuous_episode){
+    
+    model <- glm(y_recur_within_180 ~ risk_level + episode_first_duration,
+                 data = df_feature,
+                 family = binomial()
+                 )
+  } else {
+    
+    # model B: categorical duration
+    model <- glm(y_recur_within_180 ~ risk_level + episode_type,
+                 data = df_feature,
+                 family = binomial()
+                 )
+  }
   
   return(model)
 }
 
-
-# model B: categorical duration
-
-fit_model_categorical <- function(df_feature){
-  
-  model <- glm(y_recur_within_180 ~ risk_level + episode_type,
-               data = df_feature,
-               family = binomial()
-               )
-  
-  return(model)
-  
-}
 
 # add prediction
 
-add_prediction <- function(df_feature, model){
+func_add_prediction <- function(df_feature, model){
   
   df_pred <- df_feature |>
     mutate(pred_prob = predict(model,
@@ -44,7 +47,7 @@ add_prediction <- function(df_feature, model){
 
 # evaluate model
 
-evaluate_model <- function(df_pred){
+func_evaluate_model <- function(df_pred){
   
   confusion <- table(Actual = df_pred$y_recur_within_180,
                      Predicted = df_pred$pred_class)
