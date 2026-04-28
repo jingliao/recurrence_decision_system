@@ -20,10 +20,10 @@ func_simulate_events <- function(n_person = 500){
                                           prob = c(0.5, 0.3, 0.2)))
   
   # 2. assign recurrence probability using a binomial distribution, Y_i~Ber(p_i)
-  # define recurrance probability, which is a conditional probability, P(recurrence|risk level)
+  # define recurrence probability, which is a conditional probability, P(recurrence|risk level)
   # if risk level is low, medium or high, the recurrence probability is 0.2, 0.4 or 0.7
   # design logic: assume feature (risk level) affects outcome, 
-  # i.e. high rish -> high probability of recurrence 
+  # i.e. high risk -> high probability of recurrence 
   
   df_person <- df_person |>
     mutate(recur_prob = case_when(risk_level == "low" ~ 0.2,
