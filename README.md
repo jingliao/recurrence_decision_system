@@ -11,7 +11,6 @@ Stakeholders       : die Menschen
 This project extends a simple recurrence pridction model (Project, recurrence_modelling) into a small decision-support pipeline.
 It demonstrates how model outputs can be validated, interpreted, and translated into actionable risk tiers.
 
-
 ## 2. Dependencies
 
 - R version 4.5.0
@@ -22,9 +21,25 @@ It demonstrates how model outputs can be validated, interpreted, and translated 
 
 This decision supporting project is an extension of the Recurrence Modelling Project. 
 It additionally includes validation checks on prediction outputs and convert predictions into risk tiers and suggested actions.
-The workflow is as below:
 
-simulate_data -> features -> model -> prediction -> validation -> decision -> report
+The complete workflow is: simulate_data -> features -> model -> prediction -> validation -> decision -> report
+
+The goal is to operationalise recurrence prediction into a reproducible decision-support workflow for cross-functional use.
+
+It aims to achieve the following:
+
+- how to design models into procedures
+- how to deal with mistaken data
+- how to turn outputs to actions
+- how to let cross-functional team use this system
+
+This project answers the question: What should we do next after Recurrence Modelling Project and pinpoints on:
+
+- turn model score to decision tier
+- validation and trust layer
+- pipeline orchestration
+- operational reporting
+- ownership and workflow thinking
 
 ## 4. Architecture/Structure
 
@@ -104,6 +119,7 @@ Evaluation is to compare what has been observed with what is predicted in the fo
 ### Prediction validation
 
 The purpose of validation on prediction outputs is to ensure data quality and logical reliability.
+e.g. second episode date is earlier than first episode date, negative duration, risk tier has missing values, ... etc.
 
 1. Prediction outputs should include the following columns: 
    - risk level
@@ -129,111 +145,19 @@ The purpose of validation on prediction outputs is to ensure data quality and lo
    - Low risk tier      : routine review
    - Others unspecified : check
 
-
 ## 6. Deployment
 
-To reproduce the report locally, simply navigate to report/model_report.qmd and render the file, 
-or execute `quarto::quarto_render("report/model_report.qmd")` in the Console in this project directory.
+To reproduce the report locally, simply run the following code in the console in this project directory:
+
+`library(targets)`
+
+`tar_make()`
 
 ## 7. Outputs
 Currently only an HTML report is available through quarto.
 
 ## 8. Known Issues/To Do
-This is an in-sample prediction, as predictions are generated on the same simulated data used for training. 
-In a production setting, a train-test split (out-of-sample evaluation) would be used to obtain unbiased performance estimates. 
-E.g. use 70% of simulated data for model training and 30% for evaluation.
+As it is an extension of Recurrence Modelling Project, in-sample prediction is used. Details, see recurrence_modelling/README.md. 
 
 ## 9. Useful Commands
 The design/ folder is used for demonstration purposes only. It is not part of the project pipeline or workflow.
-
-
-
-## Deployment
-
-run the pipeline via code below in console:
-
-```{r}
-library(targets)
-tar_make()
-```
-## Key idea
-
-This project is not about building a more complex model. It focuses on:
-
-turning model outputs into something that can actually be used
-
-## Structure
-
-- R/
-  |----- simulate_data.R
-  |----- feature_engineering.R
-  |----- model.R
-  |----- validation.R
-  |----- decision.R
-- report/
-  |----- decision_report.qmd
-- _targets.R
-
-## Notes
-
-- Data is simulated for demonstration purposes
-- Risk tiers are based on simple thresholds
-- The emphasis is on workflow design reather than model performance
-
------------------------------------------
-
-Operationalising recurrence prediction into a reproducible decision-support workflow for cross-functional use.
-The goal of this project is to demonstrate my competency, not only building models but also:
-- how to design models into procedures
-- how to deal with mistaken data
-- how to turn outputs to actions
-- how to let cross-functional team use this system
-
-This project answers the question, 'What should we do next' after project 2 and pinpoints these items:
-- turn model score to decision tier
-- validation and trust layer
-- pipeline orchestration
-- operational reporting
-- ownership and workflow thinking
-
-The core of this project includes:
-1. to determine risk tier and suggested actions for each individual with validation to enable architect/governance thinking:
-- required columns check
-- duplicate key check
-- impossible sequence check
-- missingness summary
-- risk score range check
-- data drift / unexpected distribution shift
-- output row count check
-
-e.g. second episode date is earlier than first episode date, 
-     negative duration
-     duplicated person_id + index_date
-     risk score is out of the range of (0,1)
-     risk tier has missing value
-     the ratio of high risk cases is plumeted 
-
-2. operational layer to clarify:
-
-- pipeline runs weekly/monthly
-- who reads the report
-- what decisions the output informs
-- what to do when validation fails
-- what to do when model confidence drops
-
-# placeholder, complete this readme file
-
-Purpose for each R script:
-1. ingestion.R
-   read data and standardise columns
-2. episode.R
-   episode
-3. features.R
-   only use index episode
-4. model.R
-   model
-5. scoring.R
-6. decision.R
-7. validation.R
-
-
