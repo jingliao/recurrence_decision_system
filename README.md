@@ -12,8 +12,8 @@ Stakeholders        : die Menschen
 # Quick Entry View
 
 - project summary, see this README
-- pipeline design, see `design/DAG.html`
-- example output, see `reports/decision_report.html`
+- pipeline design, see https://jingliao.github.io/recurrence_decision_system/design/DAG.html
+- example output, see https://jingliao.github.io/recurrence_decision_system/report/decision_report.html
 
 ## 1. Purpose
 
