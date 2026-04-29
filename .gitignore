@@ -1,7 +1,24 @@
+
+# R sessions and Studio
+
 .Rproj.user/
+.Rhistory
+.RData
 _targets/
-data/output/
+
+# report outputs
 report/*.html
-*.Rhistory
-*.RData
+report/*_files/
+
+!report/decision_report_files/
+!report/decision_report.html
+
+# design outputs
+design/*.html
+design/*_files/
+
+!design/DAG.html
+!design/DAG_files/
+
+# msc
 .positai

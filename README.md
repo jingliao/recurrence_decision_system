@@ -2,15 +2,23 @@
 
 ```text
 
-Project             : Recurrence Decision System
+Project             : Recurrence Decision System (Proof of Concept)
 Author              : Jing Liao
 Last updated date   : 28-04-2026
 Stakeholders        : die Menschen
 
 ```
+
+# Quick Entry View
+
+- project summary, see this README
+- pipeline design, see `design/DAG.html`
+- example output, see `reports/decision_report.html`
+
 ## 1. Purpose
 
-This project extends a simple recurrence pridction model (Project, recurrence_modelling) into a small decision-support pipeline.
+This project is a proof-of-concept designed to illustrate how decision-support workflows can be structured. 
+It extends a simple recurrence prediction model (Recurrence Modelling Project) into a small decision-support pipeline.
 It demonstrates how model outputs can be validated, interpreted, and translated into actionable risk tiers.
 
 ## 2. Dependencies
@@ -31,7 +39,7 @@ The goal is to operationalise recurrence prediction into a reproducible decision
 It aims to achieve the following:
 
 - how to design models into procedures
-- how to deal with mistaken data
+- how to handle data quality issues
 - how to turn outputs to actions
 - how to let cross-functional team use this system
 
@@ -52,7 +60,7 @@ my_ds_portfolio/portfolio_projects/recurrence_decision_system/
 |----- run_pipeline.R
 |----- README.md
 |----- _targets.R
-|----- _targets/ (do not commit this file)
+|----- _targets/ (pipeline cache, excluded from version control)
 |----- R/
        |----- load_packages.R
        |----- simulate_data.R
@@ -77,7 +85,7 @@ my_ds_portfolio/portfolio_projects/recurrence_decision_system/
 ### Simulated Data
 
 1. The data includes the following variables:
-   - personal identification
+   - synthetic person_id
    - risk level of having episode recurrence
    - recurrence probability
    - first episode start and end date
@@ -146,7 +154,7 @@ e.g. second episode date is earlier than first episode date, negative duration, 
    - Medium risk tier   : predicted probability is [0.4, 0.7)
    - Low risk tier      : predicted probability is <0.4
    
-2. Suggested action associated with the Risk tier is defined when
+2. Example "suggested action" associated with each rsk tier is defined when
    - High risk tier     : prioritise follow-up
    - Medium risk tier   : monitor
    - Low risk tier      : routine review
@@ -161,7 +169,7 @@ To reproduce the report locally, simply run the following code in the console in
 
 The `run_all()` function is the entry point to execute the entire project. 
 The argument `openReport = TRUE` indicates a report will be displayed through an HTML page. 
-If `openReport = TRUE`, all the code will be executed without showing the report page. 
+If `openReport = FALSE`, all the code will be executed without showing the report page. 
 This is for non-reporting purpose such as data updates and debugging.
 
 ## 7. Outputs
