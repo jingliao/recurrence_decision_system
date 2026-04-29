@@ -7,10 +7,9 @@
 
 ## About
 
-This project demonstrates an end-to-end reporting workflow using R, including data preparation, analysis, and multiple reporting outputs 
-(e.g. html, word file and a Shiny app).
+This project is a proof-of-concept designed to illustrate how decision-support workflows can be structured. 
 
 ## Documentation
 
-View full project documentation: https://jingliao.github.io/recurrence_decision_system/
+[View full project documentation](https://github.com/jingliao/recurrence_decision_system)
 

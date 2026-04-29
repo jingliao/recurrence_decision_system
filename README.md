@@ -58,6 +58,7 @@ This project answers the question: What should we do next after Recurrence Model
 my_ds_portfolio/portfolio_projects/recurrence_decision_system/
 |----- recurrence_decision_system.Rproj
 |----- run_pipeline.R
+|----- index.md (a landing page to GitHub Page)
 |----- README.md
 |----- _targets.R
 |----- _targets/ (pipeline cache, excluded from version control)
