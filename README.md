@@ -1,11 +1,13 @@
 # Metadata
 
-Project : Recurrence Decision System
-Author  : Jing Liao
-Last updated date  : 28-04-2026
-Stakeholders       : die Menschen
+```text
 
+Project             : Recurrence Decision System
+Author              : Jing Liao
+Last updated date   : 28-04-2026
+Stakeholders        : die Menschen
 
+```
 ## 1. Purpose
 
 This project extends a simple recurrence pridction model (Project, recurrence_modelling) into a small decision-support pipeline.
@@ -47,6 +49,7 @@ This project answers the question: What should we do next after Recurrence Model
 
 my_ds_portfolio/portfolio_projects/recurrence_decision_system/
 |----- recurrence_decision_system.Rproj
+|----- run_pipeline.R
 |----- README.md
 |----- _targets.R
 |----- _targets/ (do not commit this file)
@@ -61,6 +64,10 @@ my_ds_portfolio/portfolio_projects/recurrence_decision_system/
        |----- decision_report_files/ 
        |----- decision_report.qmd
        |----- decision_report.html
+|----- design/
+       |----- pipeline_visualisation.R
+       |----- DAG.html
+       |----- DAG_files
 
 ```
 
@@ -147,11 +154,14 @@ e.g. second episode date is earlier than first episode date, negative duration, 
 
 ## 6. Deployment
 
-To reproduce the report locally, simply run the following code in the console in this project directory:
+To reproduce the report locally, simply run the following code in the console in this project directory.
+`source("run_pipeline.R")`
+`run_all(openReport = TRUE)` 
 
-`library(targets)`
-
-`tar_make()`
+The `run_all()` function is the entry point to execute the entire project. 
+The argument `openReport = TRUE` indicates a report will be displayed through an HTML page. 
+If the argument value is 'FALSE`, all the code will be executed without showing the report page. 
+This is for non-reporting purpose such as data updates and debugging.
 
 ## 7. Outputs
 Currently only an HTML report is available through quarto.
