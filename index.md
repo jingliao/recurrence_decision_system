@@ -1,9 +1,9 @@
-# Simulated Healthcare Consultation Reporting
+# Recurrence Decision System (Proof of Concept)
 
 ## Quick View
 
-- Pipeline design: https://jingliao.github.io/consultation_reporting/design/DAG.html
-- Example report: https://jingliao.github.io/consultation_reporting/reports/report_quarto.html
+- [Pipeline design](https://jingliao.github.io/recurrence_decision_system/design/DAG.html)
+- [Example report](https://jingliao.github.io/recurrence_decision_system/report/decision_report.html)
 
 ## About
 
@@ -12,5 +12,5 @@ This project demonstrates an end-to-end reporting workflow using R, including da
 
 ## Documentation
 
-View full project documentation: https://jingliao.github.io/consultation_reporting/
+View full project documentation: https://jingliao.github.io/recurrence_decision_system/
 
