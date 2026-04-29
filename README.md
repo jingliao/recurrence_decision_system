@@ -156,11 +156,12 @@ e.g. second episode date is earlier than first episode date, negative duration, 
 
 To reproduce the report locally, simply run the following code in the console in this project directory.
 `source("run_pipeline.R")`
+
 `run_all(openReport = TRUE)` 
 
 The `run_all()` function is the entry point to execute the entire project. 
 The argument `openReport = TRUE` indicates a report will be displayed through an HTML page. 
-If the argument value is 'FALSE`, all the code will be executed without showing the report page. 
+If `openReport = TRUE`, all the code will be executed without showing the report page. 
 This is for non-reporting purpose such as data updates and debugging.
 
 ## 7. Outputs
